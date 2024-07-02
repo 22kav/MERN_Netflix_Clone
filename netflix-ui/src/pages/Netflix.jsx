@@ -11,13 +11,13 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import Slider from "../components/Slider";
 function Netflix() {
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const movies = useSelector((state) => state.netflix.movies);
   const genres = useSelector((state) => state.netflix.genres);
   const genresLoaded = useSelector((state) => state.netflix.genresLoaded);
   const [email, setEmail] = useState("");
   const getMoviesFromRange = (from, to) => {
-    
+
     return movies.slice(from, to);
   };
   const navigate = useNavigate();
@@ -31,42 +31,42 @@ function Netflix() {
       if (!currentUser) navigate("/login");
       else setEmail(currentUser.email);
     });
-},[])
+  }, [])
   useEffect(() => {
     if (genresLoaded) {
       dispatch(fetchMovies({ genres, type: "all" }));
     }
   }, [genresLoaded]);
 
-  
+
 
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-  
-  var data = getMoviesFromRange(0,100);
- var x= Math.floor(Math.random() * data.length)
-var mv=data[x]
-if(!mv){
-  mv={
-    "id": 453395,
-    "name": "Doctor Strange in the Multiverse of Madness",
-    "image": "/wcKFYIiVDvRURrzglV9kGu7fpfY.jpg",
-    "genres": [
+
+  var data = getMoviesFromRange(0, 100);
+  var x = Math.floor(Math.random() * data.length)
+  var mv = data[x]
+  if (!mv) {
+    mv = {
+      "id": 453395,
+      "name": "Doctor Strange in the Multiverse of Madness",
+      "image": "/wcKFYIiVDvRURrzglV9kGu7fpfY.jpg",
+      "genres": [
         "Fantasy",
         "Action",
         "Adventure"
-    ]
-}
+      ]
+    }
 
-}
+  }
   return (
     <Container>
       <Navbar isScrolled={isScrolled} email={email} />
       <div className="hero">
-        
-          
+
+
         <img
           src={`https://image.tmdb.org/t/p/original/${mv.image}`}
           alt="background"
@@ -78,15 +78,15 @@ if(!mv){
           </div>
           <div className="buttons flex">
             <button
-              onClick={() => navigate("/player",{state:{id:mv}})}
+              onClick={() => navigate("/player", { state: { id: mv } })}
               className="flex j-center a-center"
             >
               <FaPlay />
               Play
             </button>
-            <button  onClick={() => navigate("/info",{state:{id:mv}})} className="flex j-center a-center">
+            <button onClick={() => navigate("/info", { state: { id: mv } })} className="flex j-center a-center">
               <AiOutlineInfoCircle />
-              More Info 
+              More Info
             </button>
           </div>
         </div>
@@ -149,8 +149,3 @@ const Container = styled.div`
   }
 `;
 export default Netflix;
-// {"adult":false,"backdrop_path":"/wcKFYIiVDvRURrzglV9kGu7fpfY.jpg","belongs_to_collection":{"id":618529,"name":"Doctor Strange Collection","poster_path":"/vIxHQxusmCGOLf3dHnCbVppBV56.jpg","backdrop_path":"/5ZuctJh5uX5L2dz1CjA7WsTJwZk.jpg"},"budget":200000001,"genres":[{"id":14,"name":"Fantasy"},{"id":28,"name":"Action"},{"id":12,"name":"Adventure"}],"homepage":"https://www.marvel.com/movies/doctor-strange-in-the-multiverse-of-madness","id":453395,"imdb_id":"tt9419884","original_language":"en","original_title":"Doctor Strange in the Multiverse of Madness","overview":"Doctor Strange, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.","popularity":317.224,"poster_path":"/fwBl3J2aEXru6mrr9Xg8O99Iz2K.jpg","production_companies":[{"id":420,"logo_path":"/hUzeosd33nzE5MCNsZxCGEKTXaQ.png","name":"Marvel Studios","origin_country":"US"},{"id":176762,"logo_path":null,"name":"Kevin Feige Productions","origin_country":"US"}],"production_countries":[{"iso_3166_1":"US","name":"United States of America"}],"release_date":"2022-05-04","revenue":964091059,"runtime":126,"spoken_languages":[{"english_name":"Cantonese","iso_639_1":"cn","name":"广州话 / 廣州話"},{"english_name":"English","iso_639_1":"en","name":"English"},{"english_name":"Spanish","iso_639_1":"es","name":"Español"}],"status":"Released","tagline":"Enter a new dimension of Strange.","title":"Doctor Strange in the Multiverse of Madness","video":false,"vote_average":7.424,"vote_count":6686}
-
-// https://api.themoviedb.org/3/movie/453395?api_key=6d75b2a2e2b05ca51b4dda2ad6426fda
-
-// https://api.themoviedb.org/3/movie/453395?api_key=6d75b2a2e2b05ca51b4dda2ad6426fda&append_to_response=videos

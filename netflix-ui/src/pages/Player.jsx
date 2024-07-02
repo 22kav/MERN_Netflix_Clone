@@ -9,7 +9,6 @@ export default function Player() {
   const location = useLocation();
   const[trailer,setTrailer]=useState("_Z3QKkl1WyM")
 
-// https://api.themoviedb.org/3/movie/453395?api_key=6d75b2a2e2b05ca51b4dda2ad6426fda&append_to_response=videos
 useEffect(()=>{
   axios.get(`https://api.themoviedb.org/3/movie/${location.state.id.id}?api_key=6d75b2a2e2b05ca51b4dda2ad6426fda&append_to_response=videos`)
 .then(response => {
